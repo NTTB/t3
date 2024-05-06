@@ -2,10 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
-import { exec } from 'child_process';
-import { error } from 'console';
-import { Match } from './entities/match.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('matches')
 @ApiTags('matches')

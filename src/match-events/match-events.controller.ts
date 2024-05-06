@@ -1,6 +1,10 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { MatchEventsService } from './match-events.service';
-import { CreateScoreChangeEventDto, CreateServiceChangeEventDto } from './dto/create-match-event.dto';
+import {
+   CreateScoreChangeEventDto,
+   CreateServiceChangeEventDto ,
+   CreateTimeOutEventDto
+} from './dto/create-match-event.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('matches/:matchId/events')
@@ -16,6 +20,11 @@ export class MatchEventsController {
   @Post('score')
   createScore(@Param('matchId') matchId: string, @Body() createMatchEventDto: CreateScoreChangeEventDto) {
     return this.matchEventsService.createScore(matchId, createMatchEventDto);
+  }
+
+  @Post('timeout')
+  createTimeout(@Param('matchId') matchId: string, @Body() createTimeOutEventDto: CreateTimeOutEventDto) {
+    return this.matchEventsService.createTimeOut(matchId, createTimeOutEventDto);
   }
 
   @Get()

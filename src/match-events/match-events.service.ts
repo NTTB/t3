@@ -1,21 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateScoreChangeEventDto, CreateServiceChangeEventDto } from './dto/create-match-event.dto';
-import { ChangeScoreMatchEvent, ChangeServiceMatchEvent, MatchEvent } from './entities/match-event.entity';
+import { CreateScoreChangeEventDto, CreateServiceChangeEventDto, CreateTimeOutEventDto } from './dto/create-match-event.dto';
+import { 
+  ChangeScoreMatchEvent, 
+  ChangeServiceMatchEvent,
+  TimeOutMatchEvent, 
+  MatchEvent } from './entities/match-event.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Match } from 'src/matches/entities/match.entity';
 
 @Injectable()
 export class MatchEventsService {
+  
   constructor(
     @InjectModel(MatchEvent.name) private dataModel: Model<MatchEvent>,
-    @InjectModel(Match.name) private matchModel: Model<Match>,
   ) { }
 
-  async createScore(matchId: string, createDto: CreateScoreChangeEventDto) {
+  createScore(matchId: string, createDto: CreateScoreChangeEventDto) {
     const newEntity = new this.dataModel<ChangeScoreMatchEvent>({
       kind: ChangeScoreMatchEvent.name,
-      match: await this.matchModel.findById(matchId).exec(),
+      matchId: matchId,
       timestamp: new Date(),
       score: createDto.score,
     });
@@ -23,14 +26,32 @@ export class MatchEventsService {
     return newEntity.save();
   }
 
-  async CreateServiceChange(matchId: string, createDto: CreateServiceChangeEventDto) {
+  CreateServiceChange(matchId: string, createDto: CreateServiceChangeEventDto) {
     const newEntity = new this.dataModel<ChangeServiceMatchEvent>({
       kind: ChangeServiceMatchEvent.name,
-      match: await this.matchModel.findById(matchId).exec(),
+      matchId: matchId,
       timestamp: new Date(),
       service: createDto.serviceId,
       receiver: createDto.receiverId,
     });
+
+    return newEntity.save();
+  }
+
+  createTimeOut(matchId: string, createDto: CreateTimeOutEventDto) {
+    const newEntity = new this.dataModel<TimeOutMatchEvent>({
+      kind: TimeOutMatchEvent.name,
+      matchId: matchId,
+      timestamp: new Date(),
+      side: createDto.side,
+      type: createDto.type,
+      relatedTimeoutEventId: createDto.relatedTimeoutEventId,
+    });
+
+    console.log();
+    
+    console.log(createDto);
+    console.log(newEntity);
 
     return newEntity.save();
   }
@@ -40,15 +61,15 @@ export class MatchEventsService {
   }
 
   findByMatchId(matchId: string) {
-    return this.dataModel.find().where({'match': matchId}).exec();
+    return this.dataModel.find().where({'matchId': matchId}).exec();
   }
   
 
   findOne(matchId: string, id: string) {
-    return this.dataModel.findById(id).where({'match': matchId}).exec();
+    return this.dataModel.findById(id).where({'matchId': matchId}).exec();
   }
 
   remove(matchId: string, id: string) {
-    return this.dataModel.findByIdAndDelete(id).where({'match': matchId}).exec();
+    return this.dataModel.findByIdAndDelete(id).where({'matchId': matchId}).exec();
   }
 }

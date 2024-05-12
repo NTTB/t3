@@ -8,7 +8,7 @@ import { Model } from 'mongoose';
 @Injectable()
 export class PlayersService {
   constructor(@InjectModel(Player.name) private dataModel: Model<Player>) {}
-  
+
   create(createDto: CreatePlayerDto) {
     const newEntity = new this.dataModel(createDto);
     return newEntity.save();

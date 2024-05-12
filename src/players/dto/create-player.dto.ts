@@ -1,10 +1,10 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePlayerDto {
-    @ApiProperty()
-    firstName: string;
-    @ApiProperty()
-    middleName: string;
-    @ApiProperty()
-    lastName: string;
+  @ApiProperty()
+  firstName: string;
+  @ApiProperty()
+  middleName: string;
+  @ApiProperty()
+  lastName: string;
 }

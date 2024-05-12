@@ -4,32 +4,44 @@ import {
   CreateGameStateChangeEventDto,
   CreateScoreChangeEventDto,
   CreateServiceChangeEventDto,
-  CreateTimeOutEventDto
+  CreateTimeOutEventDto,
 } from './dto/create-match-event.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @Controller('matches/:matchId/events')
 @ApiTags('match-events')
 export class MatchEventsController {
-  constructor(private readonly matchEventsService: MatchEventsService) { }
+  constructor(private readonly matchEventsService: MatchEventsService) {}
 
   @Post('service-change')
-  createServiceChange(@Param('matchId') matchId: string, @Body() body: CreateServiceChangeEventDto) {
+  createServiceChange(
+    @Param('matchId') matchId: string,
+    @Body() body: CreateServiceChangeEventDto,
+  ) {
     return this.matchEventsService.CreateServiceChange(matchId, body);
   }
 
   @Post('score')
-  createScore(@Param('matchId') matchId: string, @Body() body: CreateScoreChangeEventDto) {
+  createScore(
+    @Param('matchId') matchId: string,
+    @Body() body: CreateScoreChangeEventDto,
+  ) {
     return this.matchEventsService.createScore(matchId, body);
   }
 
   @Post('timeout')
-  createTimeout(@Param('matchId') matchId: string, @Body() body: CreateTimeOutEventDto) {
+  createTimeout(
+    @Param('matchId') matchId: string,
+    @Body() body: CreateTimeOutEventDto,
+  ) {
     return this.matchEventsService.createTimeOut(matchId, body);
   }
 
   @Post('game-state-change')
-  createGameState(@Param('matchId') matchId: string, @Body() body: CreateGameStateChangeEventDto) {
+  createGameState(
+    @Param('matchId') matchId: string,
+    @Body() body: CreateGameStateChangeEventDto,
+  ) {
     return this.matchEventsService.createGameStateChange(matchId, body);
   }
 

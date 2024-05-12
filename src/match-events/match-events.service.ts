@@ -1,21 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateGameStateChangeEventDto, CreateScoreChangeEventDto, CreateServiceChangeEventDto, CreateTimeOutEventDto } from './dto/create-match-event.dto';
-import { 
-  ChangeScoreMatchEvent, 
+import {
+  CreateGameStateChangeEventDto,
+  CreateScoreChangeEventDto,
+  CreateServiceChangeEventDto,
+  CreateTimeOutEventDto,
+} from './dto/create-match-event.dto';
+import {
+  ChangeScoreMatchEvent,
   ChangeServiceMatchEvent,
-  TimeOutMatchEvent, 
-  MatchEvent, 
-  ChangeGameStateMatchEvent} from './entities/match-event.entity';
+  TimeOutMatchEvent,
+  MatchEvent,
+  ChangeGameStateMatchEvent,
+} from './entities/match-event.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 @Injectable()
 export class MatchEventsService {
-  
-  
   constructor(
     @InjectModel(MatchEvent.name) private dataModel: Model<MatchEvent>,
-  ) { }
+  ) {}
 
   createScore(matchId: string, createDto: CreateScoreChangeEventDto) {
     const newEntity = new this.dataModel<ChangeScoreMatchEvent>({
@@ -59,7 +63,7 @@ export class MatchEventsService {
       matchId: matchId,
       timestamp: new Date(),
       game: body.game,
-      state: body.type
+      state: body.type,
     });
 
     return newEntity.save();
@@ -70,14 +74,17 @@ export class MatchEventsService {
   }
 
   findByMatchId(matchId: string) {
-    return this.dataModel.find().where({'matchId': matchId}).exec();
+    return this.dataModel.find().where({ matchId: matchId }).exec();
   }
 
   findOne(matchId: string, id: string) {
-    return this.dataModel.findById(id).where({'matchId': matchId}).exec();
+    return this.dataModel.findById(id).where({ matchId: matchId }).exec();
   }
 
   remove(matchId: string, id: string) {
-    return this.dataModel.findByIdAndDelete(id).where({'matchId': matchId}).exec();
+    return this.dataModel
+      .findByIdAndDelete(id)
+      .where({ matchId: matchId })
+      .exec();
   }
 }

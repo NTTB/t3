@@ -3,6 +3,7 @@ import { MatchesModule } from './matches/matches.module';
 import { PlayersModule } from './players/players.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MatchEventsModule } from './match-events/match-events.module';
+import { TournamentsModule } from './tournaments/tournaments.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { MatchEventsModule } from './match-events/match-events.module';
     MatchesModule,
     PlayersModule,
     MatchEventsModule,
+    TournamentsModule,
   ],
   controllers: [],
   providers: [],

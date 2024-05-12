@@ -6,8 +6,10 @@ This project is intended to be used to manage table tennis tournaments.
 
 Some unique features:
 
-- [ ] Introduce multiple events
-- [ ] Don't require players to registered to create a match
+- [x] Don't require players to be registered to create a match
+- [ ] Associate players with tournaments
+- [ ] Have support for coach and other NPC
+- [ ] Have support for expidite (and allow attaching policies)
 - [ ] Add authorization
 - [ ] Add cryptographic proof for events
 - [ ] Introduce backplane for match events (since we might have multiple services running)

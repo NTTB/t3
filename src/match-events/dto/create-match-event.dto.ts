@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Side, TimeoutType } from "../entities/events";
+import { GameState, TimeoutSide, TimeoutType } from "../entities/enums";
 
 export class CreateScoreChangeEventDto {
     /**
@@ -29,12 +29,20 @@ export class CreateTimeOutEventDto {
     /**
      * The player id that will serve
      */
-    @ApiProperty({enum: Side})
-    side: Side;
+    @ApiProperty({enum: TimeoutSide})
+    side: TimeoutSide;
 
     @ApiProperty({enum: TimeoutType})
     type: TimeoutType;
 
     @ApiProperty()
     relatedTimeoutEventId?: string;
+}
+
+export class CreateGameStateChangeEventDto {
+    @ApiProperty()
+    game: number;
+
+    @ApiProperty({enum: GameState})
+    type: GameState;
 }

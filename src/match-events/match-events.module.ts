@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { MatchEventsService } from './match-events.service';
 import { MatchEventsController } from './match-events.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ChangeScoreMatchEvent, ChangeScoreMatchEventSchema, ChangeServiceMatchEvent, ChangeServiceMatchEventSchema, MatchEvent, MatchEventSchema, TimeOutMatchEvent, TimeOutMatchEventSchema } from './entities/match-event.entity';
+import { ChangeGameStateMatchEvent, ChangeGameStateMatchEventSchema, ChangeScoreMatchEvent, ChangeScoreMatchEventSchema, ChangeServiceMatchEvent, ChangeServiceMatchEventSchema, MatchEvent, MatchEventSchema, TimeOutMatchEvent, TimeOutMatchEventSchema } from './entities/match-event.entity';
 
 @Module({
   imports: [
@@ -13,6 +13,7 @@ import { ChangeScoreMatchEvent, ChangeScoreMatchEventSchema, ChangeServiceMatchE
          { name: ChangeScoreMatchEvent.name, schema: ChangeScoreMatchEventSchema },
          { name: ChangeServiceMatchEvent.name, schema: ChangeServiceMatchEventSchema },
          { name: TimeOutMatchEvent.name, schema: TimeOutMatchEventSchema },
+         { name: ChangeGameStateMatchEvent.name, schema: ChangeGameStateMatchEventSchema },
        ]
        }])  
   ],

@@ -1,23 +1,23 @@
 export enum PlayerSide {
-  home = 'home',
-  away = 'away',
+  HOME = 'HOME',
+  AWAY = 'AWAY',
 }
 
 export enum TimeoutSide {
-  home = 'home',
-  away = 'away',
-  referee = 'referee',
+  HOME = 'HOME',
+  AWAY = 'AWAY',
+  REFEREE = 'REFEREE',
 }
 
 export enum TimeoutType {
-  regular = 'regular',
-  medical = 'medical',
-  end = 'end',
+  REGULAR = 'REGULAR',
+  MEDICAL = 'MEDICAL',
+  END = 'END',
 }
 
 export enum GameState {
-  notStarted = 'notStarted',
-  inProgress = 'inProgress',
-  finished = 'finished',
-  interrupted = 'interrupted',
+  NOTSTARTED = 'NOTSTARTED',
+  INPROGRESS = 'INPROGRESS',
+  FINISHED = 'FINISHED',
+  INTERRUPTED = 'INTERRUPTED',
 }
